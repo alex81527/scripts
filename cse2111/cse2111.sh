@@ -53,7 +53,7 @@ while read directory; do
     mkdir -p "$output_d/$graderC/$directory"
     mkdir -p "$output_d/$graderD/$directory"
 
-    i=1
+    i=0
     # section A
     while IFS= read -r p; do
         student="`ls \"$1/$directory\" | grep -i \"$p\" `"
