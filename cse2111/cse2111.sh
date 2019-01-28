@@ -64,21 +64,21 @@ while read directory; do
     # section B
     while IFS= read -r p; do
         student="`ls \"$1/$directory\" | grep -i \"$p\" `"
-        [ -z "$student" ] && echo "$p" >> "$output_d/$file"
+        [ -z "$student" ] && echo "$p" | tee -a "$output_d/$file"
         [ -n "$student" ] && cp -r "$1/$directory/$student" "$output_d/$graderB/$directory" && i=$(($i+1))
     done <<< "$sec_B"
 
     # section C
     while IFS= read -r p; do
         student="`ls \"$1/$directory\" | grep -i \"$p\" `"
-        [ -z "$student" ] && echo "$p" >> "$output_d/$file"
+        [ -z "$student" ] && echo "$p" | tee -a "$output_d/$file"
         [ -n "$student" ] && cp -r "$1/$directory/$student" "$output_d/$graderC/$directory" && i=$(($i+1))
     done <<< "$sec_C"
 
     # section D
     while IFS= read -r p; do
         student="`ls \"$1/$directory\" | grep -i \"$p\" `"
-        [ -z "$student" ] && echo "$p" >> "$output_d/$file"
+        [ -z "$student" ] && echo "$p" | tee -a "$output_d/$file"
         [ -n "$student" ] && cp -r "$1/$directory/$student" "$output_d/$graderD/$directory" && i=$(($i+1))
     done <<< "$sec_D"
     
