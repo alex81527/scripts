@@ -23,9 +23,11 @@ if [[ $# -ne 1 || ! -d "$1" ]]; then
   exit 1
 fi
 output_d="$1/output"
-error="Student Names Directory: $WD\nMake sure it contains the lists of student names in each section."
+error="Student Names Directory: $WD\nMake sure it contains the lists of"\
+" student names in each section. \n(Sec_A.txt, Sec_B.txt, Sec_C.txt, Sec_D.txt)"
 # student names in four sections
-sec_A="`cat $WD/Sec_A.txt`" && [ -z "$sec_A" ] && echo -e "$error" >&2 && exit 1
+[ ! -f "$WD/Sec_A.txt" ] && echo -e "$error" >&2 && exit 1
+sec_A="`cat $WD/Sec_A.txt`"
 sec_B="`cat $WD/Sec_B.txt`"
 sec_C="`cat $WD/Sec_C.txt`"
 sec_D="`cat $WD/Sec_D.txt`"
