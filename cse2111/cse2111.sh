@@ -31,6 +31,17 @@ sec_A="`cat $WD/Sec_A.txt`"
 sec_B="`cat $WD/Sec_B.txt`"
 sec_C="`cat $WD/Sec_C.txt`"
 sec_D="`cat $WD/Sec_D.txt`"
+stu_cnt=0
+sec_A_cnt=`cat $WD/Sec_A.txt | wc -l`
+sec_B_cnt=`cat $WD/Sec_B.txt | wc -l`
+sec_C_cnt=`cat $WD/Sec_C.txt | wc -l`
+sec_D_cnt=`cat $WD/Sec_D.txt | wc -l`
+stu_cnt=$(($stu_cnt+$sec_A_cnt)) 
+stu_cnt=$(($stu_cnt+$sec_B_cnt))
+stu_cnt=$(($stu_cnt+$sec_C_cnt))
+stu_cnt=$(($stu_cnt+$sec_D_cnt))
+stu_cnt=$(($stu_cnt+4)) # b/c the last line doesn't have newline
+
 ##############################################################################
 
 [ -d "$output_d" ] && rm -rf "$output_d"
@@ -84,7 +95,8 @@ while read directory; do
         [ -n "$student" ] && cp -r "$1/$directory/$student" "$output_d/$graderD/$directory" && i=$(($i+1))
     done <<< "$sec_D"
     
-    echo -e "Total Submissions: $i\n"
+    echo -e "Total Submissions: $i"
+    echo -e "Total Student Counts: $stu_cnt\n"
 done <<< "`ls $1`"
 
 echo "====================================================="
